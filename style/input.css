@@ -1,0 +1,30 @@
+.search-input {
+    height: 68px;
+    width: 500px;
+    border: none;
+    border-radius: 50px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.search-input::placeholder {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 30px;
+}
+
+.search-input-forFocus::placeholder {
+    color: rgba(0, 0, 0, 0);
+}
+
+.search-input-clicked::placeholder {
+    transition: color 5s;
+    color: rgba(0, 0, 0, 0.5);
+}
