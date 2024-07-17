@@ -1,7 +1,31 @@
 //DOMContentLoaded waits for HTML to get loaded (doesnt wait for css or anything else to load). before this the css was loading sooner so the fade in transition wasnt working
-document.addEventListener('DOMContentLoaded', function() { 
+document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.search-input').classList.add('fade-in');
 });
+
+
+function getLocation() {
+    const success = (position) => {
+        console.log(position);
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`;
+        const location = fetch(geoApiUrl)
+        .then(res => res.json())
+        .then((data) => {
+            document.querySelector('.search-input').placeholder = data.locality;
+        }
+        );
+    }
+
+    const error = () => {
+        document.querySelector('.search-input').placeholder = 'Enter a city';
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error);
+}
+getLocation();
 
 //placeholder
 let timeoutBlurKey = '';

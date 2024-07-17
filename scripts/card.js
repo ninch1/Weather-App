@@ -12,7 +12,7 @@ searchCity.addEventListener('keydown', (event) => {
         searchCity.blur();
         switch(searchCity.value) {
             case '':
-                document.querySelector('.card').innerHTML = '<h1>Please enter a city</h1>';
+                alert('Please enter a city');
                 break;
             default: 
                 document.querySelector('.middle-section').innerHTML = '<div class="circle-input"></div>';
