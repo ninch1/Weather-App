@@ -1,6 +1,6 @@
 .search-input {
     height: 68px;
-    width: 500px;
+    width: 68px;
     border: none;
     border-radius: 50px;
     font-size: 30px;
@@ -8,6 +8,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+
+    animation: c-to-s .3s linear forwards;
 }
 
 .search-input:focus {
@@ -18,6 +20,12 @@
     font-family: Roboto, Arial, Helvetica, sans-serif;
     text-align: center;
     font-size: 30px;
+    opacity: 0;
+    transition: opacity 0.3s linear;
+}
+
+.search-input.fade-in::placeholder {
+    opacity: 1;
 }
 
 .search-input-forFocus::placeholder {
@@ -25,6 +33,91 @@
 }
 
 .search-input-clicked::placeholder {
-    transition: color 5s;
+    transition: color 10s;
     color: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes c-to-s {
+    0% {
+        height: 68px;
+        width: 68px;
+        border-radius: 50%;
+    }
+    100% {
+        width: 500px;
+        height: 68px;
+        border-radius: 50px;
+    }
+}
+
+/* enter animation */
+
+.circle-input {
+    width: 500px;
+    height: 68px;
+    background-color: white;
+    border-radius: 50px;
+    cursor: text;
+    animation: enter-transition 0.3s linear forwards;
+}
+
+@keyframes enter-transition {
+    0% {
+        width: 500px;
+        height: 68px;
+    }
+    100% {
+        width: 68px;
+        height: 68px;
+        transform: translate(0, -300px);
+    }
+}
+
+/* input after clicknig circle */
+
+.search-input-new {
+    height: 68px;
+    width: 68px;
+    border: none;
+    border-radius: 50px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    transform: translate(0, -300px);
+
+    animation: c-to-s .3s linear forwards;
+}
+
+.search-input-new:focus {
+    outline: none;
+}
+
+.search-input-new::placeholder {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 30px;
+}
+
+.circle-input-new {
+    width: 500px;
+    height: 68px;
+    background-color: white;
+    border-radius: 50px;
+    cursor: text;
+    transform: translate(0, -300px);
+    animation: inputToCircle 0.3s linear forwards;
+}
+
+@keyframes inputToCircle {
+    0% {
+        width: 500px;
+        height: 68px;
+    }
+    100% {
+        width: 68px;
+        height: 68px;
+    }
 }
