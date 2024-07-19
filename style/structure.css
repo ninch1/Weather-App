@@ -5,18 +5,13 @@ body {
     font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
-.top-section {
+.left-section {
     position: fixed;
-    width: 100%;
+    padding: 20px;
+    display: inline-block
 }
 
-.top-section-inside {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 20px 0px 20px;
-}
-
-.middle-section {
+.center {
     height: 100%;
     display: flex;
     justify-content: center;
