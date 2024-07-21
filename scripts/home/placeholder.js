@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function getLocation() {
     const success = (position) => {
-        console.log(position);
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 

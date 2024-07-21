@@ -4,59 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather App</title>
-  <link rel="stylesheet" href="style/structure.css">
-  <link rel="stylesheet" href="style/input.css">
-  <link rel="stylesheet" href="style/card.css">
-  <link rel="stylesheet" href="style/sidebar.css">
+  <link rel="stylesheet" href="style/home/structure.css">
+  <link rel="stylesheet" href="style/home/input.css">
+  <link rel="stylesheet" href="style/home/card.css">
+  <link rel="stylesheet" href="style/home/sidebar.css">
   <!--Roboto-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="left-section">
-    <img src="images/Cloud.png" alt="">
-  </div>
-
-  <div class="sidebar">
-    <div class="sidebar-top-section">
-      <img class="icon-menu" src="images/Menu.png" alt="">
-      <div class="home icon-container">
-        <img class="icon-home icon " src="images/Home.png" alt="">
-        <div class="icon-home-text icon-text">Home</div>
-      </div>
-      <div class="compare icon-container">
-        <img class="icon-divide icon" src="images/Divide.png" alt="">
-        <div class="icon-divide-text icon-text">Compare</div>
-      </div>
-      <div class="bookmark icon-container">
-        <img class="icon-bookmark icon" src="images/Bookmark.png" alt="">
-        <div class="icon-bookmark-text icon-text">Bookmark</div>
-      </div>
-      <div class="history icon-container">
-        <img class="icon-list icon" src="images/List.png" alt="">
-        <div class="icon-list-text icon-text">Compare</div>
-      </div>
-      <div class="align-center icon-container">
-        <img class="icon-align-center icon" src="images/Align center.png" alt="">
-        <div class="icon-align-center-text icon-text">Align</div>
-      </div>
+  <div class="background-container">
+    <div class="left-section">
+      <img src="images/Cloud.png" class="image-cloud" alt="">
     </div>
-    <img class="icon-settings icon" src="images/Settings.png" alt="">
-  </div>
-  
-  <div class="center">
-    <div class="middle-section">
-      <input type="text" class="search-input" placeholder="">
+    
+    <div class="center">
+      <div class="middle-section">
+        <input type="text" class="search-input" placeholder="">
+      </div>
+    
+      <div class="weather-card">
+      </div>
     </div>
   
-    <div class="weather-card">
+    <div class="right-section">
+      <div class="sidebar">
+        <div class="sidebar-top-section">
+          <img class="icon-menu" src="images/Menu.png" alt="">
+          <div class="home icon-container">
+            <img class="icon-home icon " src="images/Home.png" alt="">
+            <div class="icon-home-text icon-text">Home</div>
+          </div>
+          <div class="compare icon-container">
+            <img class="icon-divide icon" src="images/Divide.png" alt="">
+            <div class="icon-divide-text icon-text">Compare</div>
+          </div>
+          <div class="bookmark icon-container">
+            <img class="icon-bookmark icon" src="images/Bookmark.png" alt="">
+            <div class="icon-bookmark-text icon-text">Bookmark</div>
+          </div>
+          <div class="align-center icon-container">
+            <img class="icon-align-center icon" src="images/Align center.png" alt="">
+            <div class="icon-align-center-text icon-text">History</div>
+          </div>
+        </div>
+        <img class="icon-settings icon" src="images/Settings.png" alt="">
+      </div>
     </div>
   </div>
 
-  <script src="scripts/placeholder.js"></script>
-  <script src="scripts/card.js" type="module"></script>
-  <script src="scripts/input-new.js" type="module"></script>
+  <script src="scripts/home/placeholder.js"></script>
+  <script src="scripts/home/card.js" type="module"></script>
+  <script src="scripts/home/input-new.js" type="module"></script>
   <script src="scripts/sidebar.js"></script>
 </body>
 </html>

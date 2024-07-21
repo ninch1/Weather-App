@@ -1,0 +1,56 @@
+.sidebar {
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+}
+
+.sidebar-top-section {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+}
+
+.icon-settings {
+    padding: 20px;
+    height: 48px;
+    width: 48px;
+}
+
+.icon-menu {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.icon {
+    opacity: 0;
+    transition: opacity 0.5s;
+    cursor: pointer;
+}
+
+.active {
+    opacity: 1;
+}
+
+.icon-container {
+    position: relative;
+}
+
+.icon-text {
+    position: absolute;
+    color: white;
+    top: 50%;
+    left: -75%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s;
+    font-weight: bold;
+}
+
+.icon-container:hover .icon-text {
+    opacity: 1;
+    visibility: visible;
+}

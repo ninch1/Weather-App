@@ -1,0 +1,12 @@
+.add-bookmark-input:focus {
+    outline: none;
+}
+
+.add-bookmark-input {
+    text-align: center;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+}

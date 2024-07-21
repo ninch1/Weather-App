@@ -1,0 +1,63 @@
+.bookmarks {
+    height: 100vh;
+    color: #D9D9D9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bookmark-container {
+    width: 400px;
+}
+
+.bookmark {
+    display: flex;
+    align-items: center;
+}
+
+.bookmark-left {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.city-name {
+    font-size: 25px;
+}
+
+.bookmark-right {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.temp-remove {
+    right: 200px;
+    top: 450px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.bookmark-add {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.not-active, .icon-plus {
+    cursor: pointer;
+}
+
+.remove-bookmark {
+    cursor: pointer;
+}

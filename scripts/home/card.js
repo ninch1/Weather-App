@@ -1,5 +1,4 @@
-import { getWeatherData } from "./weather.js";
-import { renderWeatherCard } from "./weather.js";
+import { getWeatherData, renderWeatherCard } from "../weather.js";
 
 let city = '';
 
