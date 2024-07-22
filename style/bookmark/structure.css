@@ -1,9 +1,9 @@
 body {
     margin: 0;
+    background-color: #1E1E1E;
 }
 
 .background-container {
-    background-color: #1E1E1E;
     height: 100vh;
     font-family: Roboto, Arial, Helvetica, sans-serif;
     display: flex;
@@ -14,6 +14,7 @@ body {
 }
 
 .image-cloud {
+    position: fixed;
     padding: 20px;
     cursor: pointer;
 }
