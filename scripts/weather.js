@@ -7,16 +7,32 @@ export async function getWeatherData(cityName) {
         const weatherFetch = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${keyAPI}`);
         const weatherData = await weatherFetch.json();
         
-        const weather = {
-            name: weatherData.name,
-            temp: weatherData.main.temp,
-            humidity: weatherData.main.humidity,
-            description: weatherData.weather[0].description,
-            icon: weatherData.weather[0].icon
+        if (weatherFetch.ok) {
+            const weather = {
+                name: weatherData.name,
+                temp: weatherData.main.temp,
+                humidity: weatherData.main.humidity,
+                description: weatherData.weather[0].description,
+                icon: weatherData.weather[0].icon
+            }
+            return weather;
+        } else {
+            console.error('Error fetching weather data:', weatherData);
+            return null;
         }
-        return weather;
     } catch(error) {
-        console.error(error);
+        console.error('Error:', error);
+        return null;
+    }
+}
+
+export async function cityValidator(cityName) {
+    const data = await getWeatherData(cityName);
+
+    if (data === null) {
+        return false;
+    } else {
+        return true;
     }
 }
 
@@ -24,21 +40,28 @@ export async function renderWeatherCard(cityName) {
     try {
         const weatherData = await getWeatherData(cityName);
 
-        const temp = (weatherData.temp - 273.15).toFixed(1);
+        if (weatherData) {
+            const temp = (weatherData.temp - 273.15).toFixed(1);
 
-        document.querySelector('.weather-card').innerHTML = `
-        <div class="card">
-                <h1 class="city-name">${weatherData.name}</h1>
-                <div class="temperature">${temp}°C</div>
-                <div class="humidity">${weatherData.humidity}%</div>
-                <div class="weather-description">${weatherData.description}</div>
-                <img src="https://openweathermap.org/img/wn/${weatherData.icon}@2x.png" class="emoji">
-            </div>
-        `;
+            document.querySelector('.weather-card').innerHTML = `
+                <div class="card">
+                    <h1 class="city-name">${weatherData.name}</h1>
+                    <div class="temperature">${temp}°C</div>
+                    <div class="humidity">${weatherData.humidity}%</div>
+                    <div class="weather-description">${weatherData.description}</div>
+                    <img src="https://openweathermap.org/img/wn/${weatherData.icon}@2x.png" class="emoji">
+                </div>
+            `;
 
-        document.title = `${weatherData.name} - ${temp}°C`;
-    } catch(error) {
+            document.title = `${weatherData.name} - ${temp}°C`;
+            return true;
+        } else {
+            console.error('Failed due to error in fetching weather data.');
+            return false;
+        }
+    } catch (error) {
         console.error(error);
+        return false;
     }
 }
 
@@ -48,29 +71,34 @@ export async function generateBookmarkHTML() {
     const bookmarkPromises = bookmarkList.map(async (elementCity, index) => {
         try {
             const weatherData = await getWeatherData(elementCity);
-            const temp = (weatherData.temp - 273.15).toFixed(1);
 
-            return `
-                <div class="bookmark">
-                    <div class="bookmark-left">
-                        <div class="city-name">${weatherData.name}</div>
-                        <img src="https://openweathermap.org/img/wn/${weatherData.icon}@2x.png" alt="">
+            if (weatherData) {
+                const temp = (weatherData.temp - 273.15).toFixed(1);
+
+                return `
+                    <div class="bookmark">
+                        <div class="bookmark-left">
+                            <div class="city-name">${weatherData.name}</div>
+                            <img src="https://openweathermap.org/img/wn/${weatherData.icon}@2x.png" alt="">
+                        </div>
+                        <div class="bookmark-right">
+                            <div class="temperature">Temperature: ${temp}°C</div>
+                            <div class="humidity">Humidity: ${weatherData.humidity}%</div>
+                            <div class="description">${weatherData.description}</div>
+                            <div class="remove-bookmark" data-index="${index}">remove</div>
+                        </div>
                     </div>
-                    <div class="bookmark-right">
-                        <div class="temperature">Temperature: ${temp}°C</div>
-                        <div class="humidity">Humidity: ${weatherData.humidity}%</div>
-                        <div class="description">${weatherData.description}</div>
-                        <div class="remove-bookmark" data-index="${index}">remove</div>
-                    </div>
-                </div>
-            `;
+                `;
+            } else {
+                console.error('Failed due to error in fetching weather data.');
+                return false;
+            }
         } catch(error) {
             console.error(error);
-            return '';
+            return false;
         }
     });
 
-    // Wait for all promises to resolve and join the results
     const results = await Promise.all(bookmarkPromises);
     HTML = results.join('');
 

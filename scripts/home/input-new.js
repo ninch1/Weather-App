@@ -13,7 +13,7 @@ document.querySelector('.middle-section').addEventListener('click', (event) => {
         //gets city from input
         const searchCity = document.querySelector('.search-input-new');
 
-        searchCity.addEventListener('keydown', (event) => {
+        searchCity.addEventListener('keydown', async (event) => {
             searchCity.focus();
             if (event.key === 'Enter') {
                 searchCity.blur();
@@ -22,9 +22,13 @@ document.querySelector('.middle-section').addEventListener('click', (event) => {
                         document.querySelector('.card').innerHTML = '<h1>Please enter a city</h1>';
                         break;
                     default: 
-                        document.querySelector('.middle-section').innerHTML = '<div class="circle-input-new"></div>';
-                        renderWeatherCard(searchCity.value);
-                        searchCity.value = '';
+                        const success = await renderWeatherCard(searchCity.value);
+                        if (!success) {
+                            alert('Please enter correct city');
+                        } else {
+                            document.querySelector('.middle-section').innerHTML = '<div class="circle-input-new"></div>';
+                            searchCity.value = '';
+                        }
                 }
             }
         });

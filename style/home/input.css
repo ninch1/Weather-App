@@ -69,7 +69,7 @@
     100% {
         width: 68px;
         height: 68px;
-        transform: translate(0, -300px);
+        transform: translate(0, -200px);
     }
 }
 
@@ -86,7 +86,7 @@
     justify-content: center;
     text-align: center;
 
-    transform: translate(0, -300px);
+    transform: translate(0, -200px);
 
     animation: c-to-s .3s linear forwards;
 }
@@ -107,7 +107,7 @@
     background-color: white;
     border-radius: 50px;
     cursor: text;
-    transform: translate(0, -300px);
+    transform: translate(0, -200px);
     animation: inputToCircle 0.3s linear forwards;
 }
 

@@ -1,23 +1,37 @@
-import { generateBookmarkHTML } from "../weather.js";
+import { generateBookmarkHTML, cityValidator } from "../weather.js";
 import { bookmarkList, saveBookmarkList } from "./bookmark list.js";
 
 export function addBookmarkEventListeners() {
     const addCity = document.querySelector('.add-bookmark-input');
+    const addBookmark = document.querySelector('.bookmark-add');
 
-    addCity.addEventListener('keydown', (event) => {
+    addCity.addEventListener('keydown', async (event) => {
         if (event.key === 'Enter') {
+            addBookmark.classList.add('not-active');
             if (addCity.value !== '') {
-                bookmarkList.push(addCity.value);
-                addCity.blur();
-                document.querySelector('.bookmark-add').innerHTML = `
-                    <img src="images/Plus.png" class="icon-plus" alt="">
-                    <div class="bookmark-add-text not-active">Add bookmark</div>
-                `;
-                addCity.value = '';
-                saveBookmarkList();
-                generateBookmarkHTML();
-
-                addBookmarkClick();
+                const cityValidity = await cityValidator(addCity.value);
+                if (cityValidity) {
+                    bookmarkList.push(addCity.value);
+                    addCity.blur();
+                    document.querySelector('.bookmark-add').innerHTML = `
+                        <img src="images/Plus.png" class="icon-plus" alt="">
+                        <div class="bookmark-add-text not-active">Add bookmark</div>
+                    `;
+                    addCity.value = '';
+                    saveBookmarkList();
+                    generateBookmarkHTML();
+    
+                    addBookmarkClick();
+                } else {
+                    addCity.blur();
+                    document.querySelector('.bookmark-add').innerHTML = `
+                        <img src="images/Plus.png" class="icon-plus" alt="">
+                        <div class="bookmark-add-text not-active">Add bookmark</div>
+                    `;
+                    addCity.value = '';
+                    addBookmarkClick();
+                    alert('Please enter correct city');
+                }
             } else {
                 addCity.blur();
                 document.querySelector('.bookmark-add').innerHTML = `
@@ -30,21 +44,36 @@ export function addBookmarkEventListeners() {
         }
     });
 
-    document.querySelector('.icon-plus').addEventListener('click', () => {
+    document.querySelector('.icon-plus').addEventListener('click', async () => {
+        addBookmark.classList.add('not-active');
+
         const inputElement = document.querySelector('.add-bookmark-input');
         if (inputElement) {
             if (inputElement.value !== '') {
-                bookmarkList.push(addCity.value);
-                addCity.blur();
-                document.querySelector('.bookmark-add').innerHTML = `
-                    <img src="images/Plus.png" class="icon-plus" alt="">
-                    <div class="bookmark-add-text not-active">Add bookmark</div>
-                `;
-                inputElement.value = '';
-                saveBookmarkList();
-                generateBookmarkHTML();
+                const cityValidity = await cityValidator(inputElement.value);
 
-                addBookmarkClick();
+                if (cityValidity) {
+                    bookmarkList.push(addCity.value);
+                    addCity.blur();
+                    document.querySelector('.bookmark-add').innerHTML = `
+                        <img src="images/Plus.png" class="icon-plus" alt="">
+                        <div class="bookmark-add-text not-active">Add bookmark</div>
+                    `;
+                    inputElement.value = '';
+                    saveBookmarkList();
+                    generateBookmarkHTML();
+    
+                    addBookmarkClick();
+                } else {
+                    addCity.blur();
+                    document.querySelector('.bookmark-add').innerHTML = `
+                        <img src="images/Plus.png" class="icon-plus" alt="">
+                        <div class="bookmark-add-text not-active">Add bookmark</div>
+                    `;
+                    inputElement.value = '';
+                    addBookmarkClick();
+                    alert('Please enter correct city');
+                }
             } else {
                 addCity.blur();
                 document.querySelector('.bookmark-add').innerHTML = `

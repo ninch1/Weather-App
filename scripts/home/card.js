@@ -2,10 +2,10 @@ import { getWeatherData, renderWeatherCard } from "../weather.js";
 
 let city = '';
 
-//gets city from input
+// gets city from input
 const searchCity = document.querySelector('.search-input');
 
-searchCity.addEventListener('keydown', (event) => {
+searchCity.addEventListener('keydown', async (event) => {
     searchCity.focus();
     if (event.key === 'Enter') {
         searchCity.blur();
@@ -14,9 +14,13 @@ searchCity.addEventListener('keydown', (event) => {
                 alert('Please enter a city');
                 break;
             default: 
-                document.querySelector('.middle-section').innerHTML = '<div class="circle-input"></div>';
-                renderWeatherCard(searchCity.value);
-                searchCity.value = '';
+                const success = await renderWeatherCard(searchCity.value);
+                if (!success) {
+                    alert('Please enter correct city');
+                } else {
+                    document.querySelector('.middle-section').innerHTML = '<div class="circle-input"></div>';
+                    searchCity.value = '';
+                }
         }
     }
 });
