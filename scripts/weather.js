@@ -36,6 +36,11 @@ export async function cityValidator(cityName) {
     }
 }
 
+export async function getCityName(cityName) {
+    const data = await getWeatherData(cityName);
+    return data.name;
+}
+
 export async function renderWeatherCard(cityName) {
     try {
         const weatherData = await getWeatherData(cityName);
@@ -85,7 +90,9 @@ export async function generateBookmarkHTML() {
                             <div class="temperature">Temperature: ${temp}°C</div>
                             <div class="humidity">Humidity: ${weatherData.humidity}%</div>
                             <div class="description">${weatherData.description}</div>
+                            <div class="bookmark-right-remove">
                             <div class="remove-bookmark" data-index="${index}">remove</div>
+                        </div>
                         </div>
                     </div>
                 `;

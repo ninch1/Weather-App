@@ -1,4 +1,4 @@
-import { generateBookmarkHTML, cityValidator } from "../weather.js";
+import { generateBookmarkHTML, cityValidator, getCityName } from "../weather.js";
 import { bookmarkList, saveBookmarkList } from "./bookmark list.js";
 
 export function addBookmarkEventListeners() {
@@ -11,17 +11,37 @@ export function addBookmarkEventListeners() {
             if (addCity.value !== '') {
                 const cityValidity = await cityValidator(addCity.value);
                 if (cityValidity) {
-                    bookmarkList.push(addCity.value);
-                    addCity.blur();
-                    document.querySelector('.bookmark-add').innerHTML = `
-                        <img src="images/Plus.png" class="icon-plus" alt="">
-                        <div class="bookmark-add-text not-active">Add bookmark</div>
-                    `;
-                    addCity.value = '';
-                    saveBookmarkList();
-                    generateBookmarkHTML();
-    
-                    addBookmarkClick();
+                    const cityName = await getCityName(addCity.value);
+                    let duplicateCity = false;
+
+                    bookmarkList.forEach(element => {
+                        if (element === cityName) {
+                            duplicateCity = true;
+                        }
+                    });
+
+                    if (duplicateCity) {
+                        addCity.blur();
+                        document.querySelector('.bookmark-add').innerHTML = `
+                            <img src="images/Plus.png" class="icon-plus" alt="">
+                            <div class="bookmark-add-text not-active">Add bookmark</div>
+                        `;
+                        addCity.value = '';
+                        addBookmarkClick();
+                        alert('You have already added this city');
+                    } else {
+                        bookmarkList.push(cityName);
+                        addCity.blur();
+                        document.querySelector('.bookmark-add').innerHTML = `
+                            <img src="images/Plus.png" class="icon-plus" alt="">
+                            <div class="bookmark-add-text not-active">Add bookmark</div>
+                        `;
+                        addCity.value = '';
+                        saveBookmarkList();
+                        generateBookmarkHTML();
+        
+                        addBookmarkClick();
+                    }
                 } else {
                     addCity.blur();
                     document.querySelector('.bookmark-add').innerHTML = `
@@ -53,17 +73,37 @@ export function addBookmarkEventListeners() {
                 const cityValidity = await cityValidator(inputElement.value);
 
                 if (cityValidity) {
-                    bookmarkList.push(addCity.value);
-                    addCity.blur();
-                    document.querySelector('.bookmark-add').innerHTML = `
-                        <img src="images/Plus.png" class="icon-plus" alt="">
-                        <div class="bookmark-add-text not-active">Add bookmark</div>
-                    `;
-                    inputElement.value = '';
-                    saveBookmarkList();
-                    generateBookmarkHTML();
-    
-                    addBookmarkClick();
+                    const cityName = await getCityName(inputElement.value); 
+                    let duplicateCity = false;
+
+                    bookmarkList.forEach(element => {
+                        if (element === cityName) {
+                            duplicateCity = true;
+                        }
+                    });
+
+                    if (duplicateCity) {
+                        addCity.blur();
+                        document.querySelector('.bookmark-add').innerHTML = `
+                            <img src="images/Plus.png" class="icon-plus" alt="">
+                            <div class="bookmark-add-text not-active">Add bookmark</div>
+                        `;
+                        inputElement.value = '';
+                        addBookmarkClick();
+                        alert('You have already added this city');
+                    } else {
+                        bookmarkList.push(cityName);
+                        addCity.blur();
+                        document.querySelector('.bookmark-add').innerHTML = `
+                            <img src="images/Plus.png" class="icon-plus" alt="">
+                            <div class="bookmark-add-text not-active">Add bookmark</div>
+                        `;
+                        inputElement.value = '';
+                        saveBookmarkList();
+                        generateBookmarkHTML();
+        
+                        addBookmarkClick();
+                    }
                 } else {
                     addCity.blur();
                     document.querySelector('.bookmark-add').innerHTML = `

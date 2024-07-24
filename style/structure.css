@@ -3,6 +3,14 @@ body {
     background-color: #1E1E1E;
 }
 
+.left {
+    width: 68px;
+}
+
+.right {
+    width: 68px;
+}
+
 .background-container {
     height: 100vh;
     font-family: Roboto, Arial, Helvetica, sans-serif;
